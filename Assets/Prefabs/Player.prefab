@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e64d4999a88bba4c9ca30ad56fc1c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <playerModel>k__BackingField:
+    uid: 0
+    moveSpeed: 0
 --- !u!114 &3178784222501342466
 MonoBehaviour:
   m_ObjectHideFlags: 0
