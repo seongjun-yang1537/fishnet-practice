@@ -2,7 +2,8 @@
     "name": "Ingame.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:6d884aaed73b4fa4691936c4ce6fdd0a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
