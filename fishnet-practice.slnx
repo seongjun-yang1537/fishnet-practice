@@ -1,4 +1,5 @@
 ﻿<Solution>
+  <Project Path="Assembly-CSharp-Editor-firstpass.csproj" />
   <Project Path="FishNet.Runtime.csproj" />
   <Project Path="Corelib.Editor.csproj" />
   <Project Path="Corelib.ProjectPlanner.csproj" />
