@@ -27,11 +27,13 @@ namespace Ingame
 
         private void OnChangedColor(uint uid)
         {
-            float hue = (uid % 1000) / 1000f;
+            float golden = 0.618033988749895f;
+            float hue = (uid * golden) % 1f;
+
             Color color = Color.HSVToRGB(hue, 0.8f, 1f);
 
             renderer.GetPropertyBlock(mpb);
-            mpb.SetColor("_BaseColor", color);
+            mpb.SetColor("_Color", color);
             renderer.SetPropertyBlock(mpb);
         }
     }
