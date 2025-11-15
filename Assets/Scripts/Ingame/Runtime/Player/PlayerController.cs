@@ -56,12 +56,13 @@ namespace Ingame
             playerView.onChangedColor.Invoke(playerModel.uid);
         }
 
-        public void Move(Vector3 direction)
+        public void Move(Vector3 normal)
         {
-            if (direction.sqrMagnitude > 1f)
-                direction.Normalize();
+            if (normal.sqrMagnitude > 1f)
+                normal.Normalize();
 
-            Vector3 next = rigidbody.position + direction * playerModel.moveSpeed * Time.deltaTime;
+            float finalMoveSpeed = playerModel.moveSpeed * PlayerConfig.MOVE_SPEED_MULTIPLIER * Time.deltaTime;
+            Vector3 next = rigidbody.position + normal * finalMoveSpeed;
             rigidbody.MovePosition(next);
         }
 
