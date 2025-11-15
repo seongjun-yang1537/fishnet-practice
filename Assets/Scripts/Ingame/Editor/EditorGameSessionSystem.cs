@@ -3,6 +3,7 @@ using UnityEditor;
 
 namespace Ingame
 {
+    [CustomEditor(typeof(GameSessionSystem))]
     public class EditorGameSessionSystem : Editor
     {
         GameSessionSystem script;
@@ -30,8 +31,15 @@ namespace Ingame
                 + SEditorGUILayout.Horizontal()
                 .Content(
                     SEditorGUILayout.Button("Join")
+                    .OnClick(OnButtonJoin)
                 )
             );
+        }
+
+        private void OnButtonJoin()
+        {
+            PlayerSessionData sessionData = new();
+            script.JoinPlayer(sessionData);
         }
     }
 }
