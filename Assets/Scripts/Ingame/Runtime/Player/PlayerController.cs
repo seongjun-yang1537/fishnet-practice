@@ -64,5 +64,10 @@ namespace Ingame
             Vector3 next = rigidbody.position + direction * playerModel.moveSpeed * Time.deltaTime;
             rigidbody.MovePosition(next);
         }
+
+        public void Jump()
+        {
+            Debug.Log("Jump");
+        }
     }
 }

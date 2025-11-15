@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Corelib.Utils;
 using TriInspector;
 using UnityEngine;
 
 namespace Ingame
 {
-    public class GameSessionSystem : MonoBehaviour
+    public class GameSessionSystem : Singleton<GameSessionSystem>
     {
         public static uint sessionUIDCounter = 0;
 

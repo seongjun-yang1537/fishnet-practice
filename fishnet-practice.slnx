@@ -6,9 +6,9 @@
   <Project Path="FishNet.Codegen.Cecil.csproj" />
   <Project Path="FishNet.Demos.csproj" />
   <Project Path="CoreLib.csproj" />
+  <Project Path="Ingame.Runtime.csproj" />
   <Project Path="Unity.FishNet.Codegen.csproj" />
   <Project Path="GameKit.Dependencies.csproj" />
-  <Project Path="Ingame.Runtime.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Ingame.Editor.csproj" />
 </Solution>

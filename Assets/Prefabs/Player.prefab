@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerModel>k__BackingField:
     uid: 0
-    moveSpeed: 0
+    moveSpeed: 1
 --- !u!114 &3178784222501342466
 MonoBehaviour:
   m_ObjectHideFlags: 0

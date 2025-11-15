@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
+using Corelib.Utils;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +12,7 @@ using VContainer.Unity;
 namespace Ingame
 {
     [RequireComponent(typeof(WorldScope))]
-    public class WorldController : MonoBehaviour
+    public class WorldController : Singleton<WorldController>
     {
         protected UnityEvent<WorldModel> onBuildModel = new();
 
@@ -24,6 +27,8 @@ namespace Ingame
         public Transform trEntities;
         [Required]
         public GameObject prefabPlayer;
+
+        private Dictionary<uint, PlayerController> playerControllers = new();
 
         protected virtual void Awake()
         {
@@ -41,7 +46,10 @@ namespace Ingame
 
         private void OnBuildModel(WorldModel worldModel)
         {
+            foreach (var pc in playerControllers.Values)
+                DestroyPlayer(pc);
 
+            playerControllers.Clear();
         }
 
         protected virtual void OnEnable()
@@ -57,6 +65,7 @@ namespace Ingame
         public PlayerController CreatePlayer()
         {
             LifetimeScope playerScope = prefabPlayer.GetComponent<PlayerScope>();
+
             GameObject go = scope.CreateChildFromPrefab(playerScope).gameObject;
             Transform tr = go.transform;
             tr.SetParent(trEntities);
@@ -69,19 +78,48 @@ namespace Ingame
         {
             if (pc == null) pc = CreatePlayer();
 
+            uint newUID = worldModel.wid++;
             PlayerModel playerModel = pc.playerModel;
-            playerModel.uid = worldModel.wid++;
+            playerModel.uid = newUID;
 
             worldModel.AddPlayer(playerModel);
+            playerControllers.Add(newUID, pc);
 
             return pc;
         }
 
         public bool DespawnPlayer(uint uid)
         {
+            playerControllers.Remove(uid);
             return worldModel.RemovePlayer(uid);
         }
         public bool DespawnPlayer(PlayerController pc)
             => DespawnPlayer(pc.playerModel.uid);
+
+        public bool DestroyPlayer(uint uid)
+        {
+            bool removed = worldModel.RemovePlayer(uid);
+            if (!removed) return false;
+
+            PlayerController pc = FindPlayerByUID(uid);
+            if (pc == null) return true;
+
+            LifetimeScope scope = pc.GetComponent<LifetimeScope>();
+            if (scope != null)
+                Destroy(scope.gameObject);
+            else
+                Destroy(pc.gameObject);
+
+            return true;
+        }
+
+        public bool DestroyPlayer(PlayerController pc)
+            => DestroyPlayer(pc.playerModel.uid);
+
+        public PlayerController FindPlayerByUID(uint uid)
+        {
+            if (!playerControllers.ContainsKey(uid)) return null;
+            return playerControllers[uid];
+        }
     }
 }

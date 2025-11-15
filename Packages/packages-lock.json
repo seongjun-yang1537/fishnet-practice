@@ -186,13 +186,6 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.wooshii.hierarchydecorator": {
-      "version": "https://github.com/WooshiiDev/HierarchyDecorator.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "112f6c7a5dffb09b91650cc094ea5e438157fbea"
-    },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.17.0",
       "depth": 0,

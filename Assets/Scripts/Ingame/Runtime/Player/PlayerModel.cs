@@ -6,6 +6,6 @@ namespace Ingame
     public class PlayerModel
     {
         public uint uid;
-        public float moveSpeed;
+        public float moveSpeed = 1f;
     }
 }
