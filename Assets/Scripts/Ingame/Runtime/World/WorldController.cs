@@ -58,6 +58,8 @@ namespace Ingame
         {
             LifetimeScope playerScope = prefabPlayer.GetComponent<PlayerScope>();
             GameObject go = scope.CreateChildFromPrefab(playerScope).gameObject;
+            Transform tr = go.transform;
+            tr.SetParent(trEntities);
 
             PlayerController pc = go.GetComponent<PlayerController>();
             return pc;

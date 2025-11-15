@@ -12,7 +12,6 @@ namespace Ingame
 
         protected virtual void Awake()
         {
-            renderer = GetComponent<MeshRenderer>();
             mpb = new MaterialPropertyBlock();
         }
 
