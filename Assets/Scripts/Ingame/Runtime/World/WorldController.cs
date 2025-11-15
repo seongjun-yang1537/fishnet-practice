@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using VContainer;
@@ -19,7 +20,9 @@ namespace Ingame
         [field: SerializeField]
         public WorldModel worldModel { get; private set; }
 
+        [Required]
         public Transform trEntities;
+        [Required]
         public GameObject prefabPlayer;
 
         protected virtual void Awake()

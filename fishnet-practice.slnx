@@ -10,4 +10,5 @@
   <Project Path="GameKit.Dependencies.csproj" />
   <Project Path="Ingame.Runtime.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Ingame.Editor.csproj" />
 </Solution>

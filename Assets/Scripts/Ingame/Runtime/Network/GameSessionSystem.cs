@@ -1,23 +1,34 @@
 using System;
 using System.Collections.Generic;
+using TriInspector;
 using UnityEngine;
 
 namespace Ingame
 {
     public class GameSessionSystem : MonoBehaviour
     {
-        private static uint sessionUidCounter = 0;
+        public static uint sessionUIDCounter = 0;
+
+        [Required]
+        public WorldController worldController;
 
         public Dictionary<uint, PlayerSessionData> sessionDatas = new();
 
         public bool JoinPlayer(PlayerSessionData sessionData)
         {
-            uint newUid = sessionUidCounter++;
+            uint newUID = sessionUIDCounter + 1;
+            if (!sessionDatas.TryAdd(newUID, sessionData)) return false;
 
-            sessionData.uid = newUid;
+            PlayerController pc = worldController.SpawnPlayer();
+            if (pc == null) return false;
+
+            sessionData.uid = newUID;
             sessionData.joinedTime = DateTime.Now;
+            sessionData.worldPlayerUID = pc.playerModel.uid;
 
-            return sessionDatas.TryAdd(newUid, sessionData);
+            sessionUIDCounter++;
+
+            return true;
         }
 
         public bool LeavePlayer(uint uid)
