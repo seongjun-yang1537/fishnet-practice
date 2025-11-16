@@ -14,7 +14,15 @@ namespace Ingame
 
         public void Join()
         {
-            sessionData = new();
+            if (GameSessionSystem.Instance == null)
+            {
+                Debug.LogError("GameSessionSystem is not available.");
+                return;
+            }
+
+            sessionData = new PlayerSessionData();
+            Debug.Log("RPC_RequestJoinServer");
+
             bool success = GameSessionSystem.Instance.JoinPlayer(sessionData);
 
             if (!success)
