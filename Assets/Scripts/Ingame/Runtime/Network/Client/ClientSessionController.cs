@@ -10,15 +10,18 @@ namespace Ingame
     [RequireComponent(typeof(ClientCameraController))]
     public class ClientSessionController : Singleton<ClientSessionController>
     {
+        #region ========== Event ==========
         public UnityEvent<PlayerController> onFocusPlayer = new();
+        #endregion =========================
+
+        [SerializeField]
+        private uint currentUID = uint.MaxValue;
+        private PlayerController currentPlayer => GetCurrentPlayerController();
 
         [SerializeField]
         private ClientInputSystem inputSystem;
         [SerializeField]
         private ClientCameraController cameraController;
-
-        [SerializeField]
-        private PlayerController currentPlayer;
 
         protected virtual void Awake()
         {
@@ -26,14 +29,29 @@ namespace Ingame
             cameraController = GetComponent<ClientCameraController>();
         }
 
-        public void FocusTarget(PlayerController pc)
+        public void BindUID(uint uid)
         {
-            this.currentPlayer = pc;
+            this.currentUID = uid;
+            OnFocusTarget();
+        }
 
-            inputSystem.BindUID(pc.playerModel.uid);
-            cameraController.BindUID(pc.playerModel.uid);
+        public void UnBindUID()
+        {
+            this.currentUID = uint.MaxValue;
+        }
 
-            onFocusPlayer.Invoke(pc);
+        private void OnFocusTarget()
+        {
+            inputSystem.BindUID(currentUID);
+            cameraController.BindUID(currentUID);
+
+            onFocusPlayer.Invoke(currentPlayer);
+        }
+
+        private PlayerController GetCurrentPlayerController()
+        {
+            if (currentUID == uint.MaxValue) return null;
+            return WorldController.Instance.FindPlayerByUID(currentUID);
         }
     }
 }
