@@ -56,12 +56,14 @@ namespace Ingame
 
             await UniTask.WaitUntil(() => networkManager.IsClientStarted);
 
+            Debug.Log($"test: {networkManager.IsServerStarted}");
             RPC_RequestJoinServer(currentPlayerName);
         }
 
-        [ServerRpc(RequireOwnership = false)]
+        [ServerRpc]
         private void RPC_RequestJoinServer(string playerName, NetworkConnection sender = null)
         {
+            Debug.Log("RPC_RequestJoinServer");
             var sessionData = new PlayerSessionData { userName = playerName };
             if (!GameSessionSystem.Instance.JoinPlayer(sessionData))
             {
@@ -76,12 +78,14 @@ namespace Ingame
         private void RPC_SendJoinSuccessTarget(NetworkConnection connection, uint uid)
         {
             ClientSessionController.Instance.BindUID(uid);
+            Debug.Log("RPC_SendJoinSuccessTarget");
             onJoinGame.Invoke();
         }
 
         [TargetRpc]
         private void RPC_SendJoinFailedTarget(NetworkConnection connection)
         {
+            Debug.Log("RPC_SendJoinFailedTarget");
             onLeaveGame.Invoke();
         }
 
@@ -96,6 +100,24 @@ namespace Ingame
 
             ClientSessionController.Instance.BindUID(sessionData.worldPlayerUID);
             onJoinGame.Invoke();
+        }
+
+        protected virtual void Update()
+        {
+            if (networkManager.IsHostStarted)
+            {
+                Debug.Log("현재 이 인스턴스는 Host이다.");
+            }
+
+            if (networkManager.IsServerStarted && !networkManager.IsClientStarted)
+            {
+                Debug.Log("Dedicated Server로만 실행 중이다.");
+            }
+
+            if (networkManager.IsClientStarted && !networkManager.IsServerStarted)
+            {
+                Debug.Log("Remote Client로만 실행 중이다.");
+            }
         }
     }
 }
