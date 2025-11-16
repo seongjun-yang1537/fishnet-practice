@@ -241,7 +241,7 @@ MonoBehaviour:
   onLeaveGame:
     m_PersistentCalls:
       m_Calls: []
-  networkManager: {fileID: 0}
+  networkManager: {fileID: 1495345702}
 --- !u!114 &197025257
 MonoBehaviour:
   m_ObjectHideFlags: 0
