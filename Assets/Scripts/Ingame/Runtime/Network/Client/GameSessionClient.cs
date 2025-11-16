@@ -1,5 +1,8 @@
 using FishNet.Connection;
+using FishNet.Managing;
 using FishNet.Object;
+using FishNet.Transporting;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -40,16 +43,54 @@ namespace Ingame
         #endregion =========================
 
         [SerializeField]
+        private NetworkManager networkManager;
+
+        [SerializeField]
         private PlayerSessionData sessionData;
+
+        private string currentPlayerName;
+
+        protected virtual void OnEnable()
+        {
+            networkManager.ClientManager.OnClientConnectionState += OnClientConnectionState;
+        }
+
+        protected virtual void OnDisable()
+        {
+            networkManager.ClientManager.OnClientConnectionState -= OnClientConnectionState;
+        }
+
+        private void OnClientConnectionState(ClientConnectionStateArgs args)
+        {
+            if (args.ConnectionState == LocalConnectionState.Started)
+            {
+                RequestJoin(currentPlayerName);
+            }
+        }
+
+        public void RequestHostJoin(string playerName)
+        {
+            this.currentPlayerName = playerName;
+            ExecuteHost();
+        }
+
+        public void RequestClientJoin(string playerName, string ipString)
+        {
+            this.currentPlayerName = playerName;
+            ExecuteClient(ipString);
+        }
 
         public void RequestJoin(string playerName)
         {
+            Debug.Log("RequestJoin");
             RPC_RequestJoinServer(playerName);
         }
 
         [ServerRpc]
         private void RPC_RequestJoinServer(string playerName, NetworkConnection sender = null)
         {
+            Debug.Log("RPC_RequestJoinServer");
+
             var sessionData = new PlayerSessionData()
             {
                 userName = playerName
@@ -70,6 +111,7 @@ namespace Ingame
         private void RPC_SendJoinSuccessTarget(NetworkConnection connection, uint uid)
         {
             ClientSessionController.Instance.BindUID(uid);
+            Debug.Log("Join Success");
             onJoinGame.Invoke();
         }
 
@@ -78,6 +120,18 @@ namespace Ingame
         {
             Debug.Log("Join Failed");
             onLeaveGame.Invoke();
+        }
+
+        public void ExecuteHost()
+        {
+            networkManager.ServerManager.StartConnection();
+            networkManager.ClientManager.StartConnection();
+        }
+
+        public void ExecuteClient(string ipString)
+        {
+            networkManager.TransportManager.Transport.SetClientAddress(ipString);
+            networkManager.ClientManager.StartConnection();
         }
 
         public void Join()
