@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 1565548473}
+  _addedNetworkObject: {fileID: 197025257}
   _networkObjectCache: {fileID: 0}
   onJoinGame:
     m_PersistentCalls:
@@ -241,7 +241,7 @@ MonoBehaviour:
   onLeaveGame:
     m_PersistentCalls:
       m_Calls: []
-  networkManager: {fileID: 1495345702}
+  networkManager: {fileID: 0}
 --- !u!114 &197025257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2841,7 +2841,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1565548472}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1495345704
 MonoBehaviour:
@@ -2915,7 +2915,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1495345703}
   - {fileID: 853485542}
   - {fileID: 197025253}
   m_Father: {fileID: 0}
@@ -4198,14 +4197,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6baac1bb2f90ec49a66204d74c2e6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputPlayerName: {fileID: 1833853635}
-  inputIpAddress: {fileID: 1447495399}
+  inputPlayerName: {fileID: 0}
+  inputIpAddress: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 2037358417}
+  - {fileID: 1495345703}
   - {fileID: 1565548472}
   - {fileID: 963194228}
   - {fileID: 1957126846}
