@@ -170,6 +170,12 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 1565548473}
   _networkObjectCache: {fileID: 0}
+  onJoinGame:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeaveGame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &259794420
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +787,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 719765494}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 197025256}
+        m_TargetAssemblyTypeName: Ingame.GameSessionClient, Ingame.Runtime
+        m_MethodName: RequestJoin
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sex
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &719765494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2655,7 +2673,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1633843923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 197025256}
+        m_TargetAssemblyTypeName: Ingame.GameSessionClient, Ingame.Runtime
+        m_MethodName: RequestJoin
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sex
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1633843923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3032,6 +3062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957126846}
+  - component: {fileID: 1957126847}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -3057,6 +3088,20 @@ Transform:
   - {fileID: 2100904615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1957126847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957126845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49887fafea545e4aae4dacc0e21f46a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasIngame: {fileID: 641722831}
+  canvasOutgame: {fileID: 2123199691}
 --- !u!1 &2037358416
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Ingame
 {
@@ -31,6 +32,11 @@ namespace Ingame
                 return _instance;
             }
         }
+        #endregion =========================
+
+        #region ========== Event ==========
+        public UnityEvent onJoinGame = new();
+        public UnityEvent onLeaveGame = new();
         #endregion =========================
 
         [SerializeField]
@@ -64,12 +70,14 @@ namespace Ingame
         private void RPC_SendJoinSuccessTarget(NetworkConnection connection, uint uid)
         {
             ClientSessionController.Instance.BindUID(uid);
+            onJoinGame.Invoke();
         }
 
         [TargetRpc]
         private void RPC_SendJoinFailedTarget(NetworkConnection connection)
         {
             Debug.Log("Join Failed");
+            onLeaveGame.Invoke();
         }
 
         public void Join()
