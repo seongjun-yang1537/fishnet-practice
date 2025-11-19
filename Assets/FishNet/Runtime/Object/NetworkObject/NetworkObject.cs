@@ -363,7 +363,7 @@ namespace FishNet.Object
         /// </summary>
         public const int UNSET_PREFABID_VALUE = ushort.MaxValue;
         #endregion
-
+        
         /// <summary>
         /// Outputs data about this NetworkObject to string.
         /// </summary>
@@ -433,17 +433,17 @@ namespace FishNet.Object
             //The object never initialized for use.
             if (!_initializedValusSet)
                 return;
-
+            
             if (NetworkObserver != null)
                 NetworkObserver.Deinitialize(destroyed: true);
-
+            
             if (NetworkManager != null)
             {
                 //Server.
                 Deinitialize_Prediction(asServer: true);
                 NetworkManager.ServerManager.Objects.NetworkObjectDestroyed(this, asServer: true);
                 InvokeStopCallbacks(asServer: true, invokeSyncTypeCallbacks: true);
-
+ 
                 //Client.
                 Deinitialize_Prediction(asServer: false);
                 NetworkManager.ClientManager.Objects.NetworkObjectDestroyed(this, asServer: false);
@@ -617,14 +617,14 @@ namespace FishNet.Object
         /// </summary>
         /// <param name="networkManager"></param>
         //public static event Action DebugOnInitialize; //QUICK-TEST Uncomment this
-
+        
         internal void InitializeEarly(NetworkManager networkManager, int objectId, NetworkConnection owner, bool asServer)
         {
             //Only initialize this bit once even if clientHost.
             if (!networkManager.DoubleLogic(asServer))
             {
                 //DebugOnInitialize?.Invoke(); //QUICK-TEST Uncomment this
-
+                
                 State = NetworkObjectState.Spawned;
                 InitializeNetworkBehavioursIfDisabled();
                 IsDeinitializing = false;
@@ -1141,7 +1141,7 @@ namespace FishNet.Object
             // TimeManager = null;
             // SceneManager = null;
             // RollbackManager = null;
-
+            
             //Misc sets.
             ObjectId = NetworkObject.UNSET_OBJECTID_VALUE;
         }
@@ -1393,9 +1393,9 @@ namespace FishNet.Object
             {
                 bool hasNetworkObjectParent = false;
                 Transform parent = transform.parent;
-                while (parent != null)
+                while (parent != null) 
                 {
-                    if (parent.TryGetComponent<NetworkObject>(out _))
+                    if (parent.TryGetComponent<NetworkObject>(out _)) 
                     {
                         hasNetworkObjectParent = true;
                         break;

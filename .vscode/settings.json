@@ -49,8 +49,7 @@
         "Obj/": true,
         "ProjectSettings/": true,
         "temp/": true,
-        "Temp/": true,
-        "**/cecil-0.11.4": true
+        "Temp/": true
     },
-    "dotnet.defaultSolution": "fishnet-practice.slnx"
+    "dotnet.defaultSolution": "fishnet-practice-real.sln"
 }
